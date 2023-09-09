@@ -14,7 +14,7 @@ image: ../teaser/how-to-improve-ux-with-optimistic-update.png
 
 낙관적 업데이트의 필요성을 처음 느낀 순간은, `장바구니에 상품 추가하기` 기능을 만들 때였습니다.
 
-<img width="294px" height="381px" src="./../images/2023-08-15-image1-without-optimistic.gif" />
+<p align="center"><img width="294px" height="381px" src="./../images/2023-08-15-image1-without-optimistic.gif" /></p>
 
 ‘장바구니 상품 추가’를 위해 POST 요청을 보내고, 이에 대한 **응답이 오기까지 3초의 지연 시간**이 있다고 해봅시다. 그리고 개발자 네로 씨는 이 응답을 기다렸다가, 응답에 따라 상태를 업데이트하여 UI를 변경하려고 합니다.
 
@@ -22,7 +22,7 @@ image: ../teaser/how-to-improve-ux-with-optimistic-update.png
 
 사용자들은 이러한 기다림에 대해 불편함을 느꼈고, 네로 씨는 `서버와의 통신과 상관없이, 화면(또는 UI) 먼저 바꿔줄 수는 없을까?` 라는 생각을 하게 됩니다.
 
-<img width="302px" height="381px" src="./../images/2023-08-15-image2-with-optimistic.gif" />
+<p align="center"><img width="302px" height="381px" src="./../images/2023-08-15-image2-with-optimistic.gif" /></p>
 
 따라서 네로 씨는 서버의 응답이 오기 전에 상태를 먼저 바꿔서, 업데이트된 상태를 화면에 반영해 주기로 했습니다.
 
@@ -167,7 +167,7 @@ export default App;
 
 위의 코드로 구현한 결과물은 아래와 같습니다.
 
-<img width="612px" height="426px" src="./../images/2023-08-15-image3-without-query.gif" />
+<p align="center"><img width="612px" height="426px" src="./../images/2023-08-15-image3-without-query.gif" /></p>
 
 처음에는 ‘취업하기’라는 선택지였고, ‘창업하기’라는 선택지로 먼저 낙관적 업데이트를 진행합니다. 그 후 API 요청을 보내고, 응답을 기다리다가 오류가 발생한 경우에 원래의 선택지(’취업하기’)로 되돌리는 모습입니다.
 
@@ -184,7 +184,7 @@ const handleOptionClick = async (option: string) => {
 };
 ```
 
-[코드 참고: https://codesandbox.io/p/sandbox/xenodochial-hertz-pmllqg?file=%2Fsrc%2FApp.tsx%3A7%2C35 ]
+자세한 코드는 [링크](https://codesandbox.io/p/sandbox/xenodochial-hertz-pmllqg?file=%2Fsrc%2FApp.tsx%3A7%2C35)에서 참고할 수 있습니다.
 
 ## tanstack-query로 낙관적 업데이트 구현하기
 
@@ -261,11 +261,11 @@ export default function VoteOptionList({
 // .. 중략
 ```
 
-[코드 참고: https://codesandbox.io/p/sandbox/intelligent-gates-f999p3?file=%2Fsrc%2FVoteOptionList.tsx%3A26%2C1 ]
+자세한 코드는 [링크](https://codesandbox.io/p/sandbox/intelligent-gates-f999p3?file=%2Fsrc%2FVoteOptionList.tsx%3A26%2C1)에서 참고할 수 있습니다.
 
-<img width="700px" height="268px" src="./../images/2023-08-15-image4-tanstack-query-documentation.png" />
+<p align="center"><img width="700px" height="268px" src="./../images/2023-08-15-image4-tanstack-query-documentation.png" /></p>
 
-`tanstack-query`에서는 어떠한 매커니즘으로 낙관적 업데이트를 구현하는지, 예시 코드와 함께 상세히 설명하고 있습니다.
+`tanstack-query`에서는 어떠한 매커니즘으로 낙관적 업데이트를 구현하는지, [공식 문서](https://tanstack.com/query/v4/docs/react/guides/optimistic-updates)에서예시 코드와 함께 상세히 설명하고 있습니다.
 
 ### 서버의 응답이 성공한 경우
 
@@ -291,17 +291,15 @@ onError: (error, _, context) => {
 
 `tanstack-query`에서 진행되는 낙관적 업데이트는 흐름도는 아래와 같습니다.
 
-<img width="700px" height="392px" src="./../images/2023-08-15-image5-optimistic-update-flow.png" />
+<p align="center"><img width="700px" height="392px" src="./../images/2023-08-15-image5-optimistic-update-flow.png" /></p>
 
 ## 낙관적 업데이트는 언제 필요할까?
 
 ### 낙관적 업데이트가 필요한 경우
 
-<img width="700px" height="210px" src="./../images/2023-08-15-image6-optimistic-updated-example.png" />
+<p align="center"><img width="700px" height="210px" src="./../images/2023-08-15-image6-optimistic-updated-example.png" /></p>
 
-(이미지 출처: https://uxplanet.org/faster-user-experience-optimistic-ui-41b151feaa28)
-
-**메시지 전송, 좋아요, 찜, 투두리스트 체크, 장바구니 담기, 게시글 비공개, 파일 업로드, 북마크** 등의 기능들은, 낙관적 업데이트가 필요한 경우들입니다.
+위 이미지 예시처럼 **메시지 전송, 좋아요, 찜, 투두리스트 체크, 장바구니 담기, 게시글 비공개, 파일 업로드, 북마크** 등의 기능들은, 낙관적 업데이트가 필요한 경우들입니다.
 
 이러한 기능들의 공통점은, 모두 **기존의 데이터에 업데이트(mutate)를 일으킨다**는 점입니다. 사용자의 동작에 따라 발생한 데이터 업데이트는, 지연 시간(latency) 없이 즉각적인 피드백을 화면에 띄워야 사용자 만족도를 높일 수 있습니다.
 
@@ -319,7 +317,7 @@ onError: (error, _, context) => {
 
 사용자가 결제 버튼을 클릭하면 어떻게 될까요? 일반적으로 결제 요청이 서버로 전송되고, ‘로딩 중’ 같은 문구나 로딩 스피너가 보일 것입니다.
 
-<img width="249px" height="209px" src="./../images/2023-08-15-image7-baemin-payment-loading.png" />
+<p align="center"><img width="249px" height="209px" src="./../images/2023-08-15-image7-baemin-payment-loading.png" /></p>
 
 만약 결제 기능에 낙관적 업데이트를 적용한다면, 결제 응답과 상관없이 장바구니의 상품을 먼저 제거하는 등 UI 먼저 업데이트하게 됩니다. 그 결과는 사용자는 결제했음에도 장바구니에 아직 상품들이 남아 있는 것을 발견합니다.
 
@@ -331,7 +329,7 @@ onError: (error, _, context) => {
 
 낙관적 업데이트는 사용자 경험을 개선하고 더 빠른 애플리케이션 응답을 제공하기 위한 좋은 전략 중 하나입니다.
 
-`tanstack query`는 낙관적 업데이트 기능을 제공하고 있고, 이러한 기능을 라이브러리 없이 직접 구현해 보는 것도 좋은 학습이 될 것이라 생각합니다!
+`tanstack-query`는 낙관적 업데이트 기능을 제공하고 있고, 이러한 기능을 라이브러리 없이 직접 구현해 보는 것도 좋은 학습이 될 것이라 생각합니다!
 
 나아가 낙관적 업데이트는 데이터의 종류를 고려해 보고 신중하게 구현해야 합니다. 만약 꼭 필요한 경우라면, 서버 응답 실패의 경우에도 오류 메시지를 사용자에게 보여주는 등 적절한 대처가 필요합니다.
 
