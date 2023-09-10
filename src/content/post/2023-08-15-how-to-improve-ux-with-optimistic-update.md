@@ -70,7 +70,7 @@ VoTogether(보투게더)라는 투표 중심의 커뮤니티 서비스를 만들
 
 VoTogether 팀은 서버 데이터로 UI를 업데이트하는 경우가 많았기 때문에 `tanstack-query`나 `swr` 같은 서버 상태 관리 라이브러리를 도입하였고, `tanstack-query`가 제공하는 메서드 중 `useMutation`(onMutate, onError, onSettled)을 이용하여 '낙관적 업데이트'를 구현하기로 하였습니다.
 
-`tanstack-query`를 사용하지 않고도 낙관적 업데이트를 구현할 수는 있지만, VoTogether 팀은 서버 상태에 대한 관리를 `tanstack-query`를 이용하고 있기에 공식 문서의 설명을 참고하여 낙관적 업데이트를 구현해 보았습니다!
+`tanstack-query`를 사용하지 않고도 낙관적 업데이트를 구현할 수는 있지만, VoTogether 팀은 서버 상태에 대한 관리를 `tanstack-query`를 이용하고 있기에 [공식 문서](https://tanstack.com/query/v4/docs/react/guides/optimistic-updates)의 설명을 참고하여 낙관적 업데이트를 구현해 보았습니다!
 
 ## 상태 관리 라이브러리 없이 구현하기
 
@@ -265,7 +265,8 @@ export default function VoteOptionList({
 자세한 코드는 [링크](https://codesandbox.io/p/sandbox/intelligent-gates-f999p3?file=%2Fsrc%2FVoteOptionList.tsx%3A26%2C1)에서 참고할 수 있습니다.
 
 <img width="700px" height="268px" src="./../images/2023-08-15-image4-tanstack-query-documentation.png" />
-`tanstack-query`에서는 어떠한 매커니즘으로 낙관적 업데이트를 구현하는지, [공식 문서](https://tanstack.com/query/v4/docs/react/guides/optimistic-updates)에서예시 코드와 함께 상세히 설명하고 있습니다.
+
+`tanstack-query`의 [공식 문서](https://tanstack.com/query/v4/docs/react/guides/optimistic-updates)는 어떠한 매커니즘으로 낙관적 업데이트를 구현하는지, 예시 코드와 함께 상세히 설명하고 있습니다.
 
 ### 서버의 응답이 성공한 경우
 
