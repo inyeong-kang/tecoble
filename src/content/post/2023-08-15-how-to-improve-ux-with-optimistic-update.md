@@ -68,7 +68,7 @@ VoTogether(보투게더)라는 투표 중심의 커뮤니티 서비스를 만들
 
 사용자는 UI가 업데이트되기를 몇 초간 기다려야 하는데, 이러한 기다림은 사용자 경험을 저하할 수 있다고 생각했습니다.
 
-VoTogether 팀은 서버 데이터로 UI를 업데이트하는 경우가 많았기 때문에 `tanstack-query`나 'swr' 같은 서버 상태 관리 라이브러리를 도입하였고, `tanstack-query`가 제공하는 메서드 중 `useMutation`(onMutate, onError, onSettled)을 이용하여 '낙관적 업데이트'를 구현하기로 하였습니다.
+VoTogether 팀은 서버 데이터로 UI를 업데이트하는 경우가 많았기 때문에 `tanstack-query`나 `swr` 같은 서버 상태 관리 라이브러리를 도입하였고, `tanstack-query`가 제공하는 메서드 중 `useMutation`(onMutate, onError, onSettled)을 이용하여 '낙관적 업데이트'를 구현하기로 하였습니다.
 
 `tanstack-query`를 사용하지 않고도 낙관적 업데이트를 구현할 수는 있지만, VoTogether 팀은 서버 상태에 대한 관리를 `tanstack-query`를 이용하고 있기에 공식 문서의 설명을 참고하여 낙관적 업데이트를 구현해 보았습니다!
 
