@@ -217,12 +217,12 @@ export const useEditVote = (postId: string) => {
   const { mutate, isLoading, isError, error } = useMutation(
     (newOption: string) => updateSelectedOptionApi(newOption),
     {
-      onMutate: async () => {
+      onMutate: async (newOption: string) => {
         // 선택지 데이터에 대한 모든 퀴리요청을 취소하여 이전 서버 데이터가 낙관적 업데이트를 덮어쓰지 않도록 함 -> refetch 취소시킴
         await queryClient.cancelQueries(queryKey);
 
         const prevOption = queryClient.getQueryData(queryKey); // 기존 선택지 데이터의 snapshot
-        queryClient.setQueryData(queryKey, prevOption); // 낙관적 업데이트 실시
+        queryClient.setQueryData(queryKey, newOption); // 새로운 선택지 데이터로 낙관적 업데이트 실시
 
         return { prevOption }; // context를 return, context 예시에는 이전 스냅샷, 새로운 값(또는 롤백하는 함수)이 있음
       },
